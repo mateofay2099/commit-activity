@@ -1,6 +1,11 @@
 :root {
   --max-width: 120rem;
   --border-radius: 1.2rem;
+  --commit-count-color-0: #ebedf0;
+  --commit-count-color-1: #9be9a8;
+  --commit-count-color-2: #46c868;
+  --commit-count-color-3: #159136;
+  --commit-count-color-4: #0a5622;
 }
 
 * {
@@ -18,4 +23,20 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   background-color: #f6f8fa;
+}
+
+.commitCountColor-0 {
+  background-color: var(--commit-count-color-0);
+}
+.commitCountColor-1 {
+  background-color: var(--commit-count-color-1);
+}
+.commitCountColor-2 {
+  background-color: var(--commit-count-color-2);
+}
+.commitCountColor-3 {
+  background-color: var(--commit-count-color-3);
+}
+.commitCountColor-4 {
+  background-color: var(--commit-count-color-4);
 }
