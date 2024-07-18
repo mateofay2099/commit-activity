@@ -2,9 +2,6 @@ import { CommitActivity, WEEK_DAYS } from "@/types";
 import { isFutureDate, getColorIndex } from "@utils";
 import { makeRequest } from "@services/makeRequest";
 
-const ENDPOINT_URL =
-  "https://api.github.com/repos/facebook/react/stats/commit_activity";
-
 export type GithubCommitActivityResponse = {
   total: number;
   week: number;
@@ -47,6 +44,16 @@ export const mapGithubResponse = (data: GithubCommitActivityResponse) => {
 };
 
 export const getCommitActivity = async () => {
+  const ENDPOINT_URL = process.env.ENDPOINT_URL;
+  if (!ENDPOINT_URL) {
+    const errMessage = "No endpoint URL provided";
+    console.error(errMessage);
+    return {
+      data: null,
+      error: errMessage,
+    };
+  }
+
   const response = await makeRequest<GithubCommitActivityResponse>(
     ENDPOINT_URL
   );
