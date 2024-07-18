@@ -3,9 +3,13 @@ type Response<T> = {
   error: boolean;
 };
 
-export const makeRequest = async <T>(url: string): Promise<Response<T>> => {
+const ONE_DAY = 60 * 60 * 24;
+export const makeRequest = async <T>(
+  url: string,
+  revalidate: number | undefined = ONE_DAY
+): Promise<Response<T>> => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { next: { revalidate } });
     const data = await response.json();
     if (!response.ok) {
       throw new Error(data.message);
