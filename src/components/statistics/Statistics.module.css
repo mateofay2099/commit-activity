@@ -1,0 +1,15 @@
+.statisticsContainer {
+  padding: 5rem 0;
+}
+
+.chartsContainer {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.statisticChart {
+  flex: 0.45;
+  max-width: 100%;
+}
