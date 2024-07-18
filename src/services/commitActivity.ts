@@ -1,4 +1,4 @@
-import { CommitActivity, WEEK_DAYS } from "@/types";
+import { DateActivity } from "@/types";
 import { isFutureDate, getColorIndex } from "@utils";
 import { makeRequest } from "@services/makeRequest";
 
@@ -9,38 +9,22 @@ export type GithubCommitActivityResponse = {
 }[];
 
 export const mapGithubResponse = (data: GithubCommitActivityResponse) => {
-  const commitActivity: CommitActivity = {
-    [WEEK_DAYS.SUNDAY]: [],
-    [WEEK_DAYS.MONDAY]: [],
-    [WEEK_DAYS.TUESDAY]: [],
-    [WEEK_DAYS.WEDNESDAY]: [],
-    [WEEK_DAYS.THURSDAY]: [],
-    [WEEK_DAYS.FRIDAY]: [],
-    [WEEK_DAYS.SATURDAY]: [],
-  };
-
-  const maxCommitCount = Math.max(
-    ...data.map((activity) => Math.max(...activity.days))
-  );
+  const commitActivity: DateActivity[] = [];
 
   data.forEach((activity) => {
     activity.days.forEach((commits, dayIndex) => {
-      const weekDay = Object.values(WEEK_DAYS)[dayIndex];
-      if (!weekDay || !commitActivity[weekDay]) return;
-
       const dayDate = new Date(activity.week * 1000);
       dayDate.setDate(dayDate.getDate() + dayIndex);
 
       if (isFutureDate(dayDate)) return;
 
-      commitActivity[weekDay].push({
+      commitActivity.push({
         date: dayDate,
         commits,
-        colorIndex: getColorIndex(commits, maxCommitCount),
       });
     });
   });
-  return commitActivity;
+  return commitActivity.sort((a, b) => a.date.getTime() - b.date.getTime());
 };
 
 export const getCommitActivity = async () => {

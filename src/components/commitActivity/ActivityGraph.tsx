@@ -1,13 +1,15 @@
-import { CommitActivity, WEEK_DAYS } from "@/types";
+import { CommitActivityByWeekDay, WEEK_DAYS } from "@/types";
 import { GraphRow } from "./GraphRow";
-import { Tooltip } from "@components/Common/Tooltip";
-import { getMonthHeadersFromActivities } from "@utils";
+import { Tooltip } from "@components/common/Tooltip";
+import { getActivityGraphHeaders } from "@utils";
 import styles from "./ActivityGraph.module.css";
 
-export const ActivityGraph = ({ activity }: { activity: CommitActivity }) => {
-  const monthHeaders = getMonthHeadersFromActivities(
-    activity[WEEK_DAYS.SUNDAY]
-  );
+type ActivityGraphProps = {
+  activity: CommitActivityByWeekDay;
+};
+
+export const ActivityGraph = ({ activity }: ActivityGraphProps) => {
+  const monthHeaders = getActivityGraphHeaders(activity[WEEK_DAYS.SUNDAY]);
   return (
     <>
       <Tooltip id="graphDataTooltip" />

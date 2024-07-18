@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styles from "./Error.module.css";
-import Link from "next/link";
 
 export const Error = () => {
   return (

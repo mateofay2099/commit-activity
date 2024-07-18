@@ -11,15 +11,18 @@ export enum WEEK_DAYS {
 export interface DateActivity {
   date: Date;
   commits: number;
+}
+
+export interface GraphDateActivity extends DateActivity {
   colorIndex: number;
 }
 
-export interface CommitActivity {
-  [WEEK_DAYS.SUNDAY]: DateActivity[];
-  [WEEK_DAYS.MONDAY]: DateActivity[];
-  [WEEK_DAYS.TUESDAY]: DateActivity[];
-  [WEEK_DAYS.WEDNESDAY]: DateActivity[];
-  [WEEK_DAYS.THURSDAY]: DateActivity[];
-  [WEEK_DAYS.FRIDAY]: DateActivity[];
-  [WEEK_DAYS.SATURDAY]: DateActivity[];
+export interface CommitActivityByWeekDay {
+  [WEEK_DAYS.SUNDAY]: GraphDateActivity[];
+  [WEEK_DAYS.MONDAY]: GraphDateActivity[];
+  [WEEK_DAYS.TUESDAY]: GraphDateActivity[];
+  [WEEK_DAYS.WEDNESDAY]: GraphDateActivity[];
+  [WEEK_DAYS.THURSDAY]: GraphDateActivity[];
+  [WEEK_DAYS.FRIDAY]: GraphDateActivity[];
+  [WEEK_DAYS.SATURDAY]: GraphDateActivity[];
 }

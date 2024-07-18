@@ -1,7 +1,9 @@
+import { WEEK_DAYS } from "@/types";
 import {
   getDisplayDate,
   getDisplayDateNumber,
   getDisplayMonth,
+  getDisplayWeekDay,
   isFutureDate,
   isThisYear,
 } from "./dateUtils";
@@ -37,6 +39,41 @@ describe("isFutureDate", () => {
   });
 });
 
+describe("getDisplayMonth", () => {
+  it("should return string with just the short month name", () => {
+    let response = getDisplayMonth(new Date("2021-01-01"));
+    expect(response).toEqual("Jan");
+
+    response = getDisplayMonth(new Date("2021-05-01"));
+    expect(response).toEqual("May");
+  });
+});
+
+describe("getDisplayWeekDay", () => {
+  it("should return strings with the weekday short names", () => {
+    let response = getDisplayWeekDay(new Date("2024-07-14"));
+    expect(response).toEqual(WEEK_DAYS.SUNDAY);
+
+    response = getDisplayWeekDay(new Date("2024-07-15"));
+    expect(response).toEqual(WEEK_DAYS.MONDAY);
+
+    response = getDisplayWeekDay(new Date("2024-07-16"));
+    expect(response).toEqual(WEEK_DAYS.TUESDAY);
+
+    response = getDisplayWeekDay(new Date("2024-07-17"));
+    expect(response).toEqual(WEEK_DAYS.WEDNESDAY);
+
+    response = getDisplayWeekDay(new Date("2024-07-18"));
+    expect(response).toEqual(WEEK_DAYS.THURSDAY);
+
+    response = getDisplayWeekDay(new Date("2024-07-19"));
+    expect(response).toEqual(WEEK_DAYS.FRIDAY);
+
+    response = getDisplayWeekDay(new Date("2024-07-20"));
+    expect(response).toEqual(WEEK_DAYS.SATURDAY);
+  });
+});
+
 describe("getDisplayDateNumber", () => {
   it("should return string with 0 prefix if it is less than 10", () => {
     const response = getDisplayDateNumber(9);
@@ -51,16 +88,6 @@ describe("getDisplayDateNumber", () => {
   it("should return same number as string if it is greater than 10", () => {
     const response = getDisplayDateNumber(11);
     expect(response).toEqual("11");
-  });
-});
-
-describe("getDisplayMonth", () => {
-  it("should return string with just the short month name", () => {
-    let response = getDisplayMonth(new Date("2021-01-01"));
-    expect(response).toEqual("Jan");
-
-    response = getDisplayMonth(new Date("2021-05-01"));
-    expect(response).toEqual("May");
   });
 });
 

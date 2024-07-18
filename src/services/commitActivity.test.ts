@@ -1,14 +1,12 @@
 import {
-  emptyParsedResponse,
   mockedGithubResponse,
-  mockedParsedResponse,
+  mockedDateActivities,
 } from "@/mocks/servicesMocks";
 import { getCommitActivity, mapGithubResponse } from "./commitActivity";
 import { isFutureDate } from "@utils";
 import { makeRequest } from "./makeRequest";
 
 jest.mock("@utils", () => ({
-  getColorIndex: jest.fn().mockReturnValue(0),
   isFutureDate: jest.fn().mockReturnValue(false),
 }));
 const mockedIsFutureDate = isFutureDate as jest.Mock;
@@ -39,16 +37,7 @@ describe("getCommitActivity", () => {
     const response = await getCommitActivity();
     expect(response).toEqual({
       error: false,
-      data: mockedParsedResponse,
-    });
-  });
-
-  it("should skip days if data is corrupted", async () => {
-    mockedGithubResponse[0].days = [0, 1, 2, 3, 4, 5, 6, 7];
-    const response = await getCommitActivity();
-    expect(response).toEqual({
-      error: false,
-      data: mockedParsedResponse,
+      data: mockedDateActivities,
     });
   });
 
@@ -78,19 +67,19 @@ describe("getCommitActivity", () => {
 });
 
 describe("mapGithubResponse", () => {
-  it("should return empty array for each week day if no data is provided", () => {
+  it("should return empty array if no data is provided", () => {
     const response = mapGithubResponse([]);
-    expect(response).toEqual(emptyParsedResponse);
+    expect(response).toEqual([]);
   });
 
-  it("should return commit activity for each week day", () => {
+  it("should return an array of commit activity", () => {
     const response = mapGithubResponse(mockedGithubResponse);
-    expect(response).toEqual(mockedParsedResponse);
+    expect(response).toEqual(mockedDateActivities);
   });
 
   it("should not include future dates", () => {
     mockedIsFutureDate.mockReturnValue(true);
     const response = mapGithubResponse(mockedGithubResponse);
-    expect(response).toEqual(emptyParsedResponse);
+    expect(response).toEqual([]);
   });
 });

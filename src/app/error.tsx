@@ -1,5 +1,5 @@
 "use client";
-import { Error as ErrorComponent } from "@components/Common/Error";
+import { Error as ErrorComponent } from "@components/common/Error";
 
 export default function Error() {
   return (
