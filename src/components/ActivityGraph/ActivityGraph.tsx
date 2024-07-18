@@ -1,18 +1,39 @@
 import { CommitActivity, WEEK_DAYS } from "@/types";
 import { GraphRow } from "./GraphRow";
+import { Tooltip } from "@components/Common/Tooltip";
+import { getMonthHeadersFromActivities } from "@/utils";
+import styles from "./ActivityGraph.module.css";
 
-export const ActivityGraph = ({ data }: { data: CommitActivity }) => {
+export const ActivityGraph = ({ activity }: { activity: CommitActivity }) => {
+  const monthHeaders = getMonthHeadersFromActivities(
+    activity[WEEK_DAYS.SUNDAY]
+  );
   return (
-    <table>
-      <tbody>
-        <GraphRow data={data[WEEK_DAYS.SUNDAY]} />
-        <GraphRow data={data[WEEK_DAYS.MONDAY]} />
-        <GraphRow data={data[WEEK_DAYS.TUESDAY]} />
-        <GraphRow data={data[WEEK_DAYS.WEDNESDAY]} />
-        <GraphRow data={data[WEEK_DAYS.THURSDAY]} />
-        <GraphRow data={data[WEEK_DAYS.FRIDAY]} />
-        <GraphRow data={data[WEEK_DAYS.SATURDAY]} />
-      </tbody>
-    </table>
+    <>
+      <Tooltip id="graphDataTooltip" />
+      <div className={styles.activityGraph}>
+        <table>
+          <thead>
+            <tr>
+              <th />
+              {monthHeaders.map(({ month, year, colSpan }) => (
+                <th
+                  key={`graphHeader-${month}-${year}`}
+                  colSpan={colSpan}
+                  className={styles.graphHeader}
+                >
+                  {month}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(activity).map(([day, data]) => (
+              <GraphRow key={`graphRow-${day}`} weekDay={day} data={data} />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };

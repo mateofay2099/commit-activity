@@ -1,5 +1,5 @@
 import { CommitActivity, WEEK_DAYS } from "@/types";
-import { getColorIndex } from "@/utils";
+import { getColorIndex, isFutureDate } from "@/utils";
 import { makeRequest } from "@services/makeRequest";
 
 const ENDPOINT_URL =
@@ -28,13 +28,16 @@ const mapGithubResponse = (data: GithubCommitActivityResponse) => {
 
   data.forEach((activity) => {
     activity.days.forEach((commits, dayIndex) => {
-      const weekDayIndex = dayIndex as WEEK_DAYS;
-      if (!commitActivity[weekDayIndex]) return;
+      const weekDay = Object.values(WEEK_DAYS)[dayIndex];
+      if (!weekDay || !commitActivity[weekDay]) return;
 
       const dayDate = new Date(activity.week * 1000);
       dayDate.setDate(dayDate.getDate() + dayIndex);
-      commitActivity[weekDayIndex].push({
-        date: new Date(activity.week * 1000),
+
+      if (isFutureDate(dayDate)) return;
+
+      commitActivity[weekDay].push({
+        date: dayDate,
         commits,
         colorIndex: getColorIndex(commits, maxCommitCount),
       });

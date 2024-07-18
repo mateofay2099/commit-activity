@@ -1,0 +1,25 @@
+.activityGraphContainer {
+  border: 0.1rem solid #c6cacf;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  max-width: max-content;
+}
+
+.colorsIndicator {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 2rem;
+}
+
+.colorsIndicator p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0 0.5rem;
+}
+
+.color {
+  height: 1.5rem;
+  width: 1.5rem;
+}
