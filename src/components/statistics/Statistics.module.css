@@ -4,12 +4,14 @@
 
 .chartsContainer {
   display: flex;
-  gap: 2rem;
+  column-gap: 2rem;
+  row-gap: 4rem;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
 .statisticChart {
   flex: 0.45;
+  min-width: 30rem;
   max-width: 100%;
 }
