@@ -1,5 +1,5 @@
 import { DateActivity } from "@/types";
-import { getDisplayDate } from "@/utils";
+import { getDisplayDate } from "@utils";
 import styles from "./ActivityGraph.module.css";
 
 const getTooltipText = (date: Date, commits: number) => {

@@ -1,7 +1,7 @@
 import { CommitActivity, WEEK_DAYS } from "@/types";
 import { GraphRow } from "./GraphRow";
 import { Tooltip } from "@components/Common/Tooltip";
-import { getMonthHeadersFromActivities } from "@/utils";
+import { getMonthHeadersFromActivities } from "@utils";
 import styles from "./ActivityGraph.module.css";
 
 export const ActivityGraph = ({ activity }: { activity: CommitActivity }) => {

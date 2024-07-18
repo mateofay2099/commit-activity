@@ -1,5 +1,5 @@
 import { CommitActivity, WEEK_DAYS } from "@/types";
-import { getColorIndex, isFutureDate } from "@/utils";
+import { isFutureDate, getColorIndex } from "@utils";
 import { makeRequest } from "@services/makeRequest";
 
 const ENDPOINT_URL =
@@ -11,7 +11,7 @@ export type GithubCommitActivityResponse = {
   days: number[];
 }[];
 
-const mapGithubResponse = (data: GithubCommitActivityResponse) => {
+export const mapGithubResponse = (data: GithubCommitActivityResponse) => {
   const commitActivity: CommitActivity = {
     [WEEK_DAYS.SUNDAY]: [],
     [WEEK_DAYS.MONDAY]: [],
