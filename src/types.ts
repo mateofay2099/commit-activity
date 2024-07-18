@@ -1,11 +1,11 @@
 export enum WEEK_DAYS {
-  SUNDAY,
-  MONDAY,
-  TUESDAY,
-  WEDNESDAY,
-  THURSDAY,
-  FRIDAY,
-  SATURDAY,
+  SUNDAY = "Sun",
+  MONDAY = "Mon",
+  TUESDAY = "Tue",
+  WEDNESDAY = "Wed",
+  THURSDAY = "Thu",
+  FRIDAY = "Fri",
+  SATURDAY = "Sat",
 }
 
 export interface DateActivity {

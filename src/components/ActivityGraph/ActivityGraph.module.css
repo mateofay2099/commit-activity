@@ -1,4 +1,21 @@
-.graphCell {
-  width: 1.5rem;
-  height: 1.5rem;
+.activityGraph {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.graphHeader {
+  padding-bottom: 0.6rem;
+}
+
+.weekDay {
+  padding-right: 0.5rem;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.graphCell,
+.graphCell a {
+  min-width: 1.7rem;
+  min-height: 1.7rem;
 }
