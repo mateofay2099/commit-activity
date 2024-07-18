@@ -1,4 +1,13 @@
-import { getColorIndex, getMonthHeadersFromActivities } from "./graphUtils";
+import {
+  getColorIndex,
+  getCommitActivityByWeekDay,
+  getActivityGraphHeaders,
+} from "@utils";
+import {
+  emptyActivitiesByWeekDay,
+  mockedActivitiesByWeekDay,
+  mockedDateActivities,
+} from "@/mocks/servicesMocks";
 
 describe("getColorIndex", () => {
   it("should return 0 if there is no commits", () => {
@@ -36,9 +45,21 @@ describe("getColorIndex", () => {
   });
 });
 
-describe("getMonthHeadersFromActivities", () => {
+describe("getCommitActivityByWeekDay", () => {
+  it("should return empty data if there are no activities", () => {
+    const response = getCommitActivityByWeekDay([]);
+    expect(response).toEqual(emptyActivitiesByWeekDay);
+  });
+
+  it("should return object with activities grouped by week day", () => {
+    const response = getCommitActivityByWeekDay(mockedDateActivities);
+    expect(response).toEqual(mockedActivitiesByWeekDay);
+  });
+});
+
+describe("getActivityGraphHeaders", () => {
   it("should return empty array if there are no activities", () => {
-    const response = getMonthHeadersFromActivities([]);
+    const response = getActivityGraphHeaders([]);
     expect(response).toEqual([]);
   });
 
@@ -51,7 +72,7 @@ describe("getMonthHeadersFromActivities", () => {
       { date: new Date("2021-02-03"), commits: 1, colorIndex: 1 },
       { date: new Date("2021-03-03"), commits: 1, colorIndex: 1 },
     ];
-    const response = getMonthHeadersFromActivities(activities);
+    const response = getActivityGraphHeaders(activities);
     expect(response).toEqual([
       { month: "Jan", year: 2021, colSpan: 2 },
       { month: "Feb", year: 2021, colSpan: 3 },
@@ -66,7 +87,7 @@ describe("getMonthHeadersFromActivities", () => {
       { date: new Date("2020-01-01"), commits: 1, colorIndex: 1 },
       { date: new Date("2020-01-02"), commits: 1, colorIndex: 1 },
     ];
-    const response = getMonthHeadersFromActivities(activities);
+    const response = getActivityGraphHeaders(activities);
     expect(response).toEqual([
       { month: "Jan", year: 2021, colSpan: 2 },
       { month: "Jan", year: 2020, colSpan: 2 },

@@ -3,10 +3,10 @@ type Response<T> = {
   error: boolean;
 };
 
-const ONE_DAY = 60 * 60 * 24;
+const DEFAULT_REVALIDATION = 60 * 60 * 12; // 12 hours
 export const makeRequest = async <T>(
   url: string,
-  revalidate: number | undefined = ONE_DAY
+  revalidate: number | undefined = DEFAULT_REVALIDATION
 ): Promise<Response<T>> => {
   try {
     const response = await fetch(url, { next: { revalidate } });
@@ -17,7 +17,6 @@ export const makeRequest = async <T>(
 
     return { data, error: false };
   } catch (err) {
-    // In a production environment, we would log the error to an external service for tracking
     console.error("Error while fetching data:", err);
     return { data: null, error: true };
   }

@@ -1,18 +1,18 @@
-import { Error } from "@components/Common/Error";
-import { getCommitActivity } from "@services/commitActivity";
-import { ActivityGraph } from "./ActivityGraph/ActivityGraph";
+import { DateActivity } from "@/types";
+import { ActivityGraph } from "./ActivityGraph";
+import { getCommitActivityByWeekDay } from "@utils";
 import styles from "./CommitActivity.module.css";
 
-export const CommitActivity = async () => {
-  const { data, error } = await getCommitActivity();
+type CommitActivityProps = {
+  data: DateActivity[];
+};
 
-  if (error || !data) {
-    return <Error />;
-  }
+export const CommitActivity = ({ data }: CommitActivityProps) => {
+  const commitActivityByWeekDay = getCommitActivityByWeekDay(data);
 
   return (
     <div className={styles.activityGraphContainer}>
-      <ActivityGraph activity={data} />
+      <ActivityGraph activity={commitActivityByWeekDay} />
       <div className={styles.colorsIndicator}>
         <p>Less</p>
         <span className={`commitCountColor-0 ${styles.color}`} />

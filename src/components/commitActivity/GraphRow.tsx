@@ -1,4 +1,4 @@
-import { DateActivity } from "@/types";
+import { GraphDateActivity } from "@/types";
 import { getDisplayDate } from "@utils";
 import styles from "./ActivityGraph.module.css";
 
@@ -10,7 +10,7 @@ const getTooltipText = (date: Date, commits: number) => {
 };
 
 interface GraphRowProps {
-  data: DateActivity[];
+  data: GraphDateActivity[];
   weekDay: string;
 }
 

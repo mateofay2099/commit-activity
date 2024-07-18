@@ -1,5 +1,5 @@
-import { DateActivity } from "@/types";
-import { getDisplayMonth } from "./dateUtils";
+import { CommitActivityByWeekDay, DateActivity, WEEK_DAYS } from "@/types";
+import { getDisplayMonth, getDisplayWeekDay } from "./dateUtils";
 
 const NON_EMPTY_COLORS_COUNT = 4;
 export const getColorIndex = (commits: number, maxCount: number) => {
@@ -14,16 +14,44 @@ export const getColorIndex = (commits: number, maxCount: number) => {
   return colorIndex;
 };
 
-type MonthHeaderData = {
+export const getCommitActivityByWeekDay = (activities: DateActivity[]) => {
+  const maxCommitCount = Math.max(
+    ...activities.map((activity) => activity.commits)
+  );
+
+  const commitActivityByDay: CommitActivityByWeekDay = {
+    [WEEK_DAYS.SUNDAY]: [],
+    [WEEK_DAYS.MONDAY]: [],
+    [WEEK_DAYS.TUESDAY]: [],
+    [WEEK_DAYS.WEDNESDAY]: [],
+    [WEEK_DAYS.THURSDAY]: [],
+    [WEEK_DAYS.FRIDAY]: [],
+    [WEEK_DAYS.SATURDAY]: [],
+  };
+
+  activities.forEach((activity) => {
+    const day = getDisplayWeekDay(activity.date);
+    commitActivityByDay[day].push({
+      ...activity,
+      colorIndex: getColorIndex(activity.commits, maxCommitCount),
+    });
+  });
+
+  return commitActivityByDay;
+};
+
+type GraphHeaderData = {
   month: string;
   year: number;
   colSpan: number;
 };
 
-export const getMonthHeadersFromActivities = (activities: DateActivity[]) => {
-  const monthHeaders: MonthHeaderData[] = [];
+export const getActivityGraphHeaders = (
+  firstWeekDayActivities: DateActivity[]
+) => {
+  const monthHeaders: GraphHeaderData[] = [];
 
-  activities.forEach(({ date }) => {
+  firstWeekDayActivities.forEach(({ date }) => {
     const currentDisplayMonth = getDisplayMonth(date);
     const foundHeader = monthHeaders.find(
       (header) =>
