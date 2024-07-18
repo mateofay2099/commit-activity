@@ -13,6 +13,8 @@ jest.mock("@utils", () => ({
 }));
 const mockedIsFutureDate = isFutureDate as jest.Mock;
 
+const consoleErrorSpy = jest.spyOn(console, "error");
+
 jest.mock("@services/makeRequest", () => ({
   makeRequest: jest.fn().mockImplementation(() => ({
     data: mockedGithubResponse,
@@ -22,6 +24,17 @@ jest.mock("@services/makeRequest", () => ({
 const mockedMakeRequest = makeRequest as jest.Mock;
 
 describe("getCommitActivity", () => {
+  const env = process.env;
+
+  beforeEach(() => {
+    jest.resetModules();
+    process.env = { ...env };
+  });
+
+  afterEach(() => {
+    process.env = env;
+  });
+
   it("should return parsed commit activity with no error", async () => {
     const response = await getCommitActivity();
     expect(response).toEqual({
@@ -36,6 +49,17 @@ describe("getCommitActivity", () => {
     expect(response).toEqual({
       error: false,
       data: mockedParsedResponse,
+    });
+  });
+
+  it("should return error if no endpoint URL is provided", async () => {
+    process.env.ENDPOINT_URL = undefined;
+    const response = await getCommitActivity();
+    const errMessage = "No endpoint URL provided";
+    expect(consoleErrorSpy).toHaveBeenCalledWith(errMessage);
+    expect(response).toEqual({
+      error: errMessage,
+      data: null,
     });
   });
 
