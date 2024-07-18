@@ -1,6 +1,7 @@
 :root {
   --max-width: 120rem;
   --border-radius: 1.2rem;
+  --border-color: #c6cacf;
   --commit-count-color-0: #ebedf0;
   --commit-count-color-1: #9be9a8;
   --commit-count-color-2: #46c868;
