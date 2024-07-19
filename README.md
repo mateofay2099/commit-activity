@@ -6,16 +6,9 @@ You can see a working version of it [here](https://commit-activity.vercel.app/).
 
 ### Technologies and decisions
 
-For this project, I used Next.js as the primary framework. Next.js is an excellent tool for building React applications due to its ease of setup and use. Although Next.js offers a range of powerful features, many of which were not utilized in this project, I think the most useful capability in this case was the `incremental static regeneration`. This feature enabled me to fetch data from the GitHub API only twice a day (or less, depending on specific requirements and use cases) and serve static pages to users. This approach significantly enhances the website's performance and to set it up it just require to added a `revalidate` property to my fetch request. This was done in the `makeRequest` component:
+For this project, I used Next.js as the primary framework. Next.js is an excellent tool for building React applications due to its ease of setup and use. Although Next.js offers a range of powerful features, many of which were not utilized in this project, I think the most useful capability in this case was the `Incremental static regeneration`. This feature enabled me to fetch data from the GitHub API only twice a day (or less, depending on specific requirements and use cases) and serve static pages to users. This approach significantly enhances the website's performance. Setting it up was straightforward, requiring only the addition of a `revalidate` property to my fetch request. This configuration was implemented in the `makeRequest` component:
 
-<style>
-.revalidationImage {
-  width: max(60%, 300px);
-  height: auto;
-}
-</style>
-
-<img src="./public/docs/revalidationCode.png" alt="Revalidation code" class="revalidationImage">
+![Revalidation code](./public/docs/revalidationCode.png)
 
 <br>
 
