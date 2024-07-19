@@ -47,15 +47,19 @@ npm install
 
 5. Run the project
 
+To start the project in development mode, just run the following command:
+
 ```bash
 npm run dev
 ```
 
-Or, if you want to build and run the project in production mode, you can use the following command:
+Or, if you want to build and run the project in production mode, you should run:
 
 ```bash
 npm run build && npm run start
 ```
+
+Finally, you can access the project by navigating to http://localhost:3000 in your browser. By default, the server runs on port 3000. If that port is already in use, Next.js will automatically assign a different one and notify you in the output. In such cases, navigate to the port specified in the output.
 
 ### Testing
 
