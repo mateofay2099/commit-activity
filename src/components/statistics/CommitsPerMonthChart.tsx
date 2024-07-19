@@ -23,7 +23,8 @@ export const CommitsPerMonthChart = ({
               data: values,
               backgroundColor: ["#1dcfcf44"],
               borderColor: ["#1dcfcf"],
-              borderWidth: 1,
+              borderWidth: 2,
+              pointHitRadius: 10,
             },
           ],
         }}
