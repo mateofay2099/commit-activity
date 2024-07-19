@@ -6,7 +6,18 @@ You can see a working version of it [here](https://commit-activity.vercel.app/).
 
 ### Technologies and decisions
 
-For this project, I chose Next.js as the primary framework. Next.js is an excellent tool for building React applications due to its ease of setup and use. Although Next.js offers a range of powerful features, many of which were not utilized in this project, I selected it primarily for its incremental static regeneration capability. This feature enabled me to fetch data from the GitHub API only twice a day (or less, depending on specific requirements and use cases) and serve static pages to users. This approach significantly enhances the website's performance.
+For this project, I used Next.js as the primary framework. Next.js is an excellent tool for building React applications due to its ease of setup and use. Although Next.js offers a range of powerful features, many of which were not utilized in this project, I think the most useful capability in this case was the `incremental static regeneration`. This feature enabled me to fetch data from the GitHub API only twice a day (or less, depending on specific requirements and use cases) and serve static pages to users. This approach significantly enhances the website's performance and to set it up it just require to added a `revalidate` property to my fetch request. This was done in the `makeRequest` component:
+
+<style>
+.revalidationImage {
+  width: max(60%, 300px);
+  height: auto;
+}
+</style>
+
+<img src="./public/docs/revalidationCode.png" alt="Revalidation code" class="revalidationImage">
+
+<br>
 
 For styling, I leveraged CSS modules, a feature built into Next.js. CSS modules allow me to write component-scoped CSS code, eliminating concerns about class conflicts with other components. For the main graph, I opted to use plain CSS, as it was straightforward to implement using a styled HTML table. Additionally, I incorporated charts to display key statistics, providing a faster way to interpret the data compared to the initial graph. To achieve this, I utilized the Chart.js library, which facilitated the creation of complex charts with minimal effort.
 

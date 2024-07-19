@@ -6,7 +6,7 @@ type Response<T> = {
 const DEFAULT_REVALIDATION = 60 * 60 * 12; // 12 hours
 export const makeRequest = async <T>(
   url: string,
-  revalidate: number | undefined = DEFAULT_REVALIDATION
+  revalidate = DEFAULT_REVALIDATION
 ): Promise<Response<T>> => {
   try {
     const response = await fetch(url, { next: { revalidate } });
