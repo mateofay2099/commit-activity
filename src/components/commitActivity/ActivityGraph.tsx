@@ -6,14 +6,15 @@ import styles from "./ActivityGraph.module.css";
 
 type ActivityGraphProps = {
   activity: CommitActivityByWeekDay;
+  id: string;
 };
 
-export const ActivityGraph = ({ activity }: ActivityGraphProps) => {
+export const ActivityGraph = ({ id, activity }: ActivityGraphProps) => {
   const monthHeaders = getActivityGraphHeaders(activity[WEEK_DAYS.SUNDAY]);
   return (
     <>
       <Tooltip id="graphDataTooltip" />
-      <div className={styles.activityGraph}>
+      <div className={styles.activityGraph} id={id}>
         <table>
           <thead>
             <tr>
