@@ -1,8 +1,11 @@
 ## Commit Activity
 
 This project displays data and statistics about commit activity based on a given Github API endpoint.
+You can find a live version of the project at:
 
-You can see a working version of it [here](https://commit-activity.vercel.app/).
+https://commit-activity.vercel.app/
+
+![App Image](./public/docs/appImage.png)
 
 ### Technologies and decisions
 
